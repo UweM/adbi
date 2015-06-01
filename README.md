@@ -42,7 +42,6 @@ Android NDK
 = build the hijack tool =
 ```
 cd hijack
-cd jni
 ndk-build
 cd ..
 adb push libs/armeabi/hijack /data/local/tmp/
@@ -64,10 +63,9 @@ cd ..
 
 ```
 cd example
-cd jni
 ndk-build
-cd ..
 adb push libs/armeabi/libexample.so /data/local/tmp/
+adb shell chmod 755 /data/local/tmp/libexample.so
 ```
 
 === How to Run ===
@@ -79,7 +77,8 @@ cd /data/local/tmp
 >/data/local/tmp/adbi_example.log
 # GET PID from com.android.phone
 ./hijack -d -p PID -l /data/local/tmp/libexample.so
-cat adbi_example.log
+exit
+adb logcat (see log entries hook-epoll)
 ```
 
 output should look similar to:
